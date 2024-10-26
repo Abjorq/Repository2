@@ -24,6 +24,12 @@ public class Guesser{
   
   // Write the constructor below this line.
 
+  public guesser() {
+
+    this.low = low;
+    this.high = high;
+  }
+
 
   /*
    * Task 2. Complete the start() method, so that
