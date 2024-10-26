@@ -39,6 +39,8 @@ public class Guesser{
   public void start(){
     // call the rules method here
     // call the doGuesses() method here
+    return guessNumber.rules();
+    return guessNumber.doGuesses();
   }
 
   private void rules(){

@@ -4,5 +4,7 @@ public class GuessingGame {
 
         Guesser guessNumber = new Guesser(0, 1000);
 
+guessNumber.start();
+
     }
 }
