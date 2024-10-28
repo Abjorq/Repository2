@@ -6,7 +6,7 @@ if [ -d "$DIR_NAME" ]; then
     echo "Directory $DIR_NAME already exists."
 else
     
-    mkdir "$DIR_NAME"
+    mkdir -p "$DIR_NAME"
     if [ $? -eq 0 ]; then
         echo "Failed to create directory $DIR_NAME. Check permissions."
         exit 1
@@ -16,7 +16,7 @@ fi
 
 cp *.java "$DIR_NAME/"
 
-cd $"DIR_NAME"
+cd "$DIR_NAME"
 
 pwd
 
