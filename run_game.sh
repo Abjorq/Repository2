@@ -2,12 +2,23 @@
 
 echo Anton Björquist
 
-DIR_NAME="anton_bjorquist_labb"
-mkdir "	$DIR_NAME"
+if [ -d "$DIR_NAME" ]; then
+    echo "Directory $DIR_NAME already exists."
+else
+    
+    mkdir "$DIR_NAME"
+    if [ $? -eq 0 ]; then
+        echo "Failed to create directory $DIR_NAME. Check permissions."
+        exit 1
+    fi
+    echo "Directory $DIR_NAME created successfully."
+fi
 
-cp java/* $"DIR_NAME/"
+cp *.java "$DIR_NAME/"
 
-cd $"DIR_NAME"pwd
+cd $"DIR_NAME"
+
+pwd
 
 echo "compiling..."
 javac *.java
@@ -16,7 +27,7 @@ if [ $? -eq 0 ]; then
     echo "running game..."
 
 
-./ GuessinGame.java
+java GuessingGame.java
 
 echo "Done"
 
@@ -26,7 +37,7 @@ fi
 
 rm *.class
 
-ls -l
+ls
 
 
 
