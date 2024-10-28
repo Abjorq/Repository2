@@ -1,0 +1,19 @@
+Vad är pull respektive push?
+PUSH - Vi vill används oss av "git push" när vi vill ladda upp en "git commit" som vi har utfärdat, i syfte av att kunna 
+presentera vår ändring i ett annat repositary, i dett fall har vi fokuserat på "remot repositary" men det går även att
+kunna "Pusha" sin commit till en annan folder. 
+PULL - Vi använder oss av "git pull" (git fetch) när vi vill hämta ändringar eller arbete - (commits) och  
+från ett "remote repositary" till vårt lokala repo - aktuella branch.
+
+När användare man "git log" respektive "git status"?
+
+"git status" visar oss vår staging area (working tree status). 
+"git log" visar oss den historik av en branch utfärdade commits, bra att använda sig av när vi vill gå tillbaka till
+en tidigare veriosn av ett "projekt"
+
+Vad är en "git branch" och varför är de viktiga?
+Vi kan använda oss av olika "feature branches" när vi vill testa ny kod för att inte riksera att göra misstag i de projekt vi
+har vi vår "Master Branch", i dessa feature-branches kan vi testa koden som vi har skapat utanför vår "Master brarnch" för att
+avgöra om det är något vi vill "merge" in i vår "Master branch" eller inte. Det är också bra i större projekt med flera som 
+arbetar på ett projekt att kunan göra olika separata branches som olika personer kan jobba på, för att sedan avgöra om dessa
+ska merge i Master Branch eller inte.
