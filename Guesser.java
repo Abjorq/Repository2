@@ -65,7 +65,7 @@ public class Guesser {
     Console console = System.console();
 
     if (console == null) {
-      System.err.println("No console available.");
+      System.err.println("Error");
       return null;
     }
 
@@ -73,10 +73,9 @@ public class Guesser {
     // As long as it is not a valid reply (one of "T" and "F")
     // write an error message, and read a new reply.
     // When you have gotten a valid reply, return it.
-    reply = System.console().readLine();
     while (true) {
       reply = System.console().readLine();
-      if (reply.equals("T") || reply.equals("F")) {
+      if ((reply.equals("T") || reply.equals("F"))) {
         return reply;
       } else {
         System.out.println("Invalid input. Please reply with T or F.");
