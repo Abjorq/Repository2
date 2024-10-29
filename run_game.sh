@@ -2,19 +2,9 @@
 
 echo Anton Björquist
 
-if [ -d "$DIR_NAME" ]; then
-    echo "Directory $DIR_NAME already exists."
-else
-    
-    mkdir -p "$DIR_NAME"
-    if [ $? -eq 0 ]; then
-        echo "Failed to create directory $DIR_NAME. Check permissions."
-        exit 1
-    fi
-    echo "Directory $DIR_NAME created successfully."
-fi
+mkdir  -p "$DIR_NAME"_labb
 
-cp *.java "$DIR_NAME/"
+cp *.java "$DIR_NAME"_labb
 
 cd "$DIR_NAME"
 
@@ -38,7 +28,3 @@ fi
 rm *.class
 
 ls
-
-
-
-
