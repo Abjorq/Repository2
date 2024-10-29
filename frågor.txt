@@ -1,19 +1,109 @@
-Vad är pull respektive push?
+-Vad är pull respektive push?
 PUSH - Vi vill används oss av "git push" när vi vill ladda upp en "git commit" som vi har utfärdat, i syfte av att kunna 
 presentera vår ändring i ett annat repositary, i dett fall har vi fokuserat på "remot repositary" men det går även att
 kunna "Pusha" sin commit till en annan folder. 
 PULL - Vi använder oss av "git pull" (git fetch) när vi vill hämta ändringar eller arbete - (commits) och  
 från ett "remote repositary" till vårt lokala repo - aktuella branch.
 
-När användare man "git log" respektive "git status"?
+-När användare man "git log" respektive "git status"?
 
 "git status" visar oss vår staging area (working tree status). 
 "git log" visar oss den historik av en branch utfärdade commits, bra att använda sig av när vi vill gå tillbaka till
 en tidigare veriosn av ett "projekt"
 
-Vad är en "git branch" och varför är de viktiga?
+-Vad är en "git branch" och varför är de viktiga?
 Vi kan använda oss av olika "feature branches" när vi vill testa ny kod för att inte riksera att göra misstag i de projekt vi
 har vi vår "Master Branch", i dessa feature-branches kan vi testa koden som vi har skapat utanför vår "Master brarnch" för att
 avgöra om det är något vi vill "merge" in i vår "Master branch" eller inte. Det är också bra i större projekt med flera som 
 arbetar på ett projekt att kunan göra olika separata branches som olika personer kan jobba på, för att sedan avgöra om dessa
 ska merge i Master Branch eller inte.
+
+-Reset, revert och restore.
+
+Reset - 
+
+Vi kan använda oss av "git reset" vid tillfälle för att ångra en commit och beroende på vilken "flagga" som anges
+tillsammans med "Reset" så har det olika effekt på vår arbetskatalog, historiken ändras vid detta kommando.
+(git reset --soft) - Vi flyttar vår HEAD till en tidigare commit och bevara alla ändringar i staging area  och 
+arbetskatalogen. Exempel över vyn finns sedan:
+
+antbjo2001@AntonROG:~/exempel.txt$ echo "första rad" > fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git add fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git commit -m "förta commit, skapar fil"
+[master (root-commit) 3a827fa] förta commit, skapar fil
+ 1 file changed, 1 insertion(+)
+ create mode 100644 fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ echo "andra rad" >> fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git add fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git commit -m "andra commit, mer text"
+[master 98cf6de] andra commit, mer text
+ 1 file changed, 1 insertion(+)
+antbjo2001@AntonROG:~/exempel.txt$ echo "tredje rad" >> fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git add fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git commit -m "tredje commit, mer text"
+[master 3e923c2] tredje commit, mer text
+ 1 file changed, 1 insertion(+)
+antbjo2001@AntonROG:~/exempel.txt$ git log --oneline
+3e923c2 (HEAD -> master) tredje commit, mer text
+98cf6de andra commit, mer text
+3a827fa förta commit, skapar fil
+antbjo2001@AntonROG:~/exempel.txt$ git reset --soft HEAD~2
+antbjo2001@AntonROG:~/exempel.txt$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   fil.txt	
+
+
+Förklaring: Här har jag skapat en katalog med filen "fil.txt" och gjort 3 st commits, i detta fall gjorde jag en "git reset --soft" för
+att flytta tillbaka HEAD men behålla ändringarna som staged.
+Hade jag istället använt mig av en "git reset --mixed HEAD~1" hade det lämnat ändringarna orörda i arbetsmappen en inte staged.
+Som sist, hade jag använt mig av "git reset --hard HEAD~1" skulle jag tagit bort ändringarna i både staging och arbetsmappen, 
+permanent.
+--------------------------------------------------------------
+
+
+Restore - 
+
+Med "git restore" återställer vi filer i vår arbetskatalog och används enbart vid att återställa filer till vår 
+senaaste version, denna funktion har ingen effekt på vår historik.
+
+
+antbjo2001@AntonROG:~/exempel.txt$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   fil.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+antbjo2001@AntonROG:~/exempel.txt$ nano fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git restore fil.txt
+antbjo2001@AntonROG:~/exempel.txt$ git status
+On branch master
+nothing to commit, working tree clean
+antbjo2001@AntonROG:~/exempel.txt$
+
+Förklaring: Här har jag lagt en ändring i staging area vilket jag sedan vill få bort, tar hjälp av "git restore <filnamn>"
+
+--------------------------------------------------------------
+
+Revert - 
+
+"git revert" används för att säkert ångra ändringar, det har ingen effekt på vår arbetskatalog och ger effekten i 
+vår historik med att skapa en ny commit.
+Se nedan för "revert-metod"
+
+antbjo2001@AntonROG:~/exempel.txt$ git commit -m "commited tredje igen"
+[master 5a68107] commited tredje igen
+ 1 file changed, 2 insertions(+)
+antbjo2001@AntonROG:~/exempel.txt$ git status
+On branch master
+nothing to commit, working tree clean
+antbjo2001@AntonROG:~/exempel.txt$ git revert HEAD
+[master da09d2a] Revert "commited tredje igen"
+ 1 file changed, 2 deletions(-)
+antbjo2001@AntonROG:~/exempel.txt$  
+
+Förklaring: Vi kan med "git revert HEAD" ångra ändringarna från den senaste commiten men vill bevara historiken.
+Detta är praktiskt om vi vill hålla kvar en historik av alla ändringar.
