@@ -2,11 +2,9 @@
 
 echo Anton Björquist
 
-mkdir  -p "$DIR_NAME"_labb
+mkdir -p "$DIR_NAME"_labb
 
 cp *.java "$DIR_NAME"_labb
-
-cd "$DIR_NAME"
 
 pwd
 
