@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo Anton Björquist
+DIR_NAME="Anton_Björquist"
 
-mkdir -p "$DIR_NAME"_labb
+echo "$DIR_NAME"
+
+mkdir -p "${DIR_NAME}_labb"
 
 cp *.java "$DIR_NAME"_labb
 
